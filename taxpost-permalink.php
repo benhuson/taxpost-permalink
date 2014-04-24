@@ -193,16 +193,19 @@ class TaxPostPermlink {
 			}
 			
 			// Handle hierarchical taxonomy structure
-			$cat_term = get_term_by( 'slug', $category_slug, $taxonomy );
-			$cat_anc = get_ancestors( $cat_term->term_id, $taxonomy );
-			foreach ( $cat_anc as $anc ) {
-				$cat_t = get_term( $anc, $taxonomy );
-				$category_slug = $cat_t->slug . '/' . $category_slug;
+			if ( ! isset( $category_slug ) || empty( $category_slug ) ) {
+				$cat_term = get_term_by( 'slug', $category_slug, $taxonomy );
+				$cat_anc = get_ancestors( $cat_term->term_id, $taxonomy );
+				foreach ( $cat_anc as $anc ) {
+					$cat_t = get_term( $anc, $taxonomy );
+					$category_slug = $cat_t->slug . '/' . $category_slug;
+				}
 			}
 			
 			// We need a default category slug if none set
-			if ( !isset( $category_slug ) || empty( $category_slug ) )
+			if ( ! isset( $category_slug ) || empty( $category_slug ) ) {
 				$category_slug = 'uncategorized';
+			}
 	
 			// Strings to replace
 			$rewritecode = array(
