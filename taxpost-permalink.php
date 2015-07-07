@@ -223,12 +223,16 @@ class TaxPostPermlink {
 
 		global $taxpostpermlink_post_types;
 
-		$taxonomy = $this->post_types[ $post_type ]['taxonomy'];
-		$t = get_taxonomy( $taxonomy );
+		if ( isset( $this->post_types[ $post_type ] ) ) {
 
-		if ( $t && isset( $t->rewrite['slug'] ) ) {
-			$taxpostpermlink_post_types[ $post_type ] = $taxonomy;
-			$slug = trailingslashit( $t->rewrite['slug'] ) . '%' . $taxonomy . '%';
+			$taxonomy = $this->post_types[ $post_type ]['taxonomy'];
+			$t = get_taxonomy( $taxonomy );
+
+			if ( $t && isset( $t->rewrite['slug'] ) ) {
+				$taxpostpermlink_post_types[ $post_type ] = $taxonomy;
+				$slug = trailingslashit( $t->rewrite['slug'] ) . '%' . $taxonomy . '%';
+			}
+
 		}
 
 		return $slug;
