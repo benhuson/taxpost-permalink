@@ -53,7 +53,7 @@ class TaxPostPermlink {
 		add_filter( 'rewrite_rules_array', array( $this, 'rewrite_rules_array' ) );
 
 		// Adjust permalinks
-		add_filter( 'post_type_link', array( $this, 'post_type_link' ), 8, 3 );
+		add_filter( 'post_type_link', array( $this, 'post_type_link' ), 1, 3 );
 		add_filter( 'attachment_link', array( $this, 'attachment_link' ), 8, 2 );
 
 		// Activation / Deactivation
